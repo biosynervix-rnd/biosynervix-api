@@ -1,14 +1,15 @@
-# 1. Check which files Git is tracking (you shouldn't see server.js or package.json here if they're missing)
-git ls-files
+# 1. Go to your backend folder
+cd C:\Users\ganes\Downloads\biosynervix-platform\backend
 
-# 2. Add the missing files explicitly
+# 2. Add the files (if not already added)
 git add server.js package.json
 
-# 3. Check the status to confirm they are added (they should appear in green)
-git status
-
-# 4. Commit the added files
+# 3. Commit
 git commit -m "Add server.js and package.json"
 
-# 5. Push the new commit to GitHub
+# 4. Push (will ask for credentials)
 git push origin main
+
+# When prompted:
+# Username: biosynervix-rnd
+# Password: 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

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Biosynervix is a biomedical AI and IoMT startup building smart healthcare technologies for next-generation hospitals.">
+  <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2300ffff'/%3E%3Ctext x='50' y='67' font-size='50' text-anchor='middle' fill='%23000'%3E✦%3C/text%3E%3C/svg%3E">
+  <title>Biosynervix | Biomedical AI & IoMT</title>
+  <!-- Google Fonts: Unique modern typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #03050B;
+      background-image: radial-gradient(circle at 20% 30%, rgba(0, 180, 220, 0.02) 0%, #020408 98%);
+      font-family: 'Inter', 'Space Grotesk', sans-serif;
+      color: #EFF6FF;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* premium glow background layers */
+    body::before {
+      content: '';
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0,255,255,0.12), transparent 70%);
+      top: -150px;
+      right: -100px;
+      z-index: -1;
+      filter: blur(50px);
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0,150,255,0.08), transparent 70%);
+      bottom: -100px;
+      left: -80px;
+      z-index: -1;
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #0A0F1A; }
+    ::-webkit-scrollbar-thumb { background: #0ff3; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #0ff; }
+
+    /* loader */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #010101;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.7s ease;
+    }
+    .loader-circle {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 3px solid rgba(0, 255, 255, 0.2);
+      border-top: 3px solid #0ff;
+      animation: spin 1s cubic-bezier(0.6, -0.28, 0.735, 0.045) infinite;
+      box-shadow: 0 0 18px cyan;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    /* glassmorphism core */
+    .glass-panel {
+      background: rgba(8, 18, 28, 0.55);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      border-radius: 32px;
+    }
+
+    /* ========== UNIQUE NAVBAR & LINK STYLES ========== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 5%;
+      background: rgba(3, 5, 11, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 255, 255, 0.35);
+      box-shadow: 0 4px 30px rgba(0,255,255,0.08);
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-icon {
+      background: linear-gradient(135deg, #0ff, #0066aa);
+      width: 44px;
+      height: 44px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.5rem;
+      box-shadow: 0 0 10px #0ff6;
+      animation: pulseGlow 2s infinite;
+    }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 10px #0ff6; }
+      50% { box-shadow: 0 0 22px cyan; }
+      100% { box-shadow: 0 0 10px #0ff6; }
+    }
+    .logo-text {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(120deg, #FFFFFF, #0ff, #3bc9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .logo-sub {
+      font-size: 0.7rem;
+      color: #8defff;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    /* UNIQUE LINK STYLES — futuristic underline + glow */
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #eef5ff;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      padding: 6px 0;
+      transition: all 0.3s ease;
+      letter-spacing: 0.3px;
+    }
+    /* futuristic link hover effect: double glow line */
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #0ff, #00aaff, transparent);
+      transition: width 0.4s cubic-bezier(0.22, 0.97, 0.36, 1.1);
+      border-radius: 2px;
+    }
+    .nav-links a:hover::before,
+    .nav-links a.active::before {
+      width: 100%;
+    }
+    .nav-links a:hover {
+      color: #0ff;
+      text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+    }
+    .nav-links a.active {
+      color: #0ff;
+      text-shadow: 0 0 5px cyan;
+    }
+    /* additional glow underline effect for active */
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: #0ff;
+      filter: blur(3px);
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    /* Back button */
+    .back-nav-btn {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      z-index: 1100;
+      background: rgba(0, 20, 40, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid #0ff;
+      border-radius: 50px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: #0ff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 12px rgba(0,255,255,0.2);
+      font-size: 0.9rem;
+    }
+    .back-nav-btn:hover {
+      background: #0ff2;
+      transform: translateX(-4px);
+      box-shadow: 0 0 18px cyan;
+    }
+
+    /* page routing */
+    .page-section {
+      display: none;
+      animation: fadeUp 0.45s ease forwards;
+      transition: all 0.4s ease;
+    }
+    .page-section.active-page {
+      display: block;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* hero */
+    .hero-full {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 2rem;
+    }
+    #particle-canvas-home {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-content {
+      z-index: 2;
+      max-width: 950px;
+    }
+    .hero-content h1 {
+      font-size: 3.6rem;
+      font-weight: 800;
+      background: linear-gradient(125deg, #FFF, #0ff, #38bdf8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+    .hero-sub {
+      font-size: 1.3rem;
+      color: #b9e6ff;
+      margin-bottom: 2rem;
+    }
+    .btn-group {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary, .btn-outline {
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: 0.3s;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+    }
+    .btn-primary {
+      background: linear-gradient(95deg, #0cf, #0a5c8e);
+      color: #000;
+      box-shadow: 0 0 12px #0cf8;
+    }
+    .btn-primary:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 0 22px cyan;
+      letter-spacing: 0.5px;
+    }
+    .btn-outline {
+      border: 1.5px solid #0ff;
+      color: #0ff;
+      background: transparent;
+    }
+    .btn-outline:hover { background: #0ff1; box-shadow: 0 0 12px cyan; transform: translateY(-2px); letter-spacing: 0.5px; }
+
+    .section-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 2rem 0 2.5rem;
+      background: linear-gradient(135deg, #fff, #5ee0fa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+    .glow-card {
+      background: rgba(10, 20, 32, 0.55);
+      backdrop-filter: blur(10px);
+      border-radius: 28px;
+      padding: 1.8rem;
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      text-align: center;
+    }
+    .glow-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: #0ff;
+      box-shadow: 0 12px 28px -10px #0ff4;
+    }
+    .glow-card i { font-size: 2.6rem; color: #0ff; margin-bottom: 1rem; }
+    .glow-card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+
+    /* tech details */
+    .tech-detailed-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .tech-detailed-card {
+      background: rgba(5, 15, 25, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 32px;
+      padding: 1.8rem;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      transition: 0.2s;
+    }
+    .tech-detailed-card img {
+      width: 60px;
+      filter: drop-shadow(0 0 8px cyan);
+      margin-bottom: 1rem;
+    }
+    .tech-detailed-card h3 { font-size: 1.6rem; margin-bottom: 0.8rem; }
+    .tech-detailed-card p { color: #bbddff; line-height: 1.4; }
+
+    .project-showcase {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .dashboard-mockup {
+      flex: 1;
+      background: rgba(0, 25, 45, 0.6);
+      border-radius: 32px;
+      padding: 1.5rem;
+      border: 1px solid cyan;
+      backdrop-filter: blur(8px);
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="100%" height="100%" fill="none"/><circle cx="80" cy="80" r="20" stroke="cyan" fill="none" stroke-width="0.5"/><circle cx="320" cy="200" r="30" stroke="cyan" fill="none" stroke-width="0.5"/><path d="M80 80 L200 150 L320 200" stroke="cyan" stroke-width="0.8" fill="none"/></svg>');
+      background-repeat: no-repeat;
+      background-position: bottom right;
+      background-size: 120px;
+    }
+    .founder-card {
+      max-width: 550px;
+      margin: 0 auto;
+      background: rgba(0, 20, 40, 0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 48px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid cyan;
+      position: relative;
+      overflow: hidden;
+    }
+    .founder-avatar-img {
+      width: 130px;
+      height: 130px;
+      background: linear-gradient(145deg, #0ff, #004488);
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.2rem;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 0 30px rgba(0,255,255,0.4);
+    }
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .contact-card {
+      flex: 1;
+      background: rgba(0, 20, 35, 0.5);
+      backdrop-filter: blur(8px);
+      border-radius: 28px;
+      padding: 2rem;
+    }
+    input, textarea {
+      outline: none;
+      font-family: 'Inter', sans-serif;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(0,255,255,0.2);
+      margin-top: 2rem;
+    }
+    .footer-social i {
+      font-size: 1.4rem;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #8defff;
+    }
+    .footer-social i:hover { color: #0ff; text-shadow: 0 0 8px cyan; }
+
+    @media (max-width: 800px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(20px);
+        width: 70%;
+        height: 100vh;
+        padding: 2rem;
+        transition: 0.3s;
+        gap: 2rem;
+      }
+      .nav-links.active { left: 0; }
+      .menu-icon { display: block; }
+      .hero-content h1 { font-size: 2.3rem; }
+      .section-title { font-size: 2rem; }
+      .back-nav-btn { bottom: 18px; left: 18px; padding: 8px 16px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="loader" id="loader"><div class="loader-circle"></div></div>
+
+<nav class="navbar">
+  <div class="logo-area">
+    <div class="logo-icon">✦</div>
+    <div>
+      <div class="logo-text">BIOSYNERVIX</div>
+      <div class="logo-sub">Biomedical AI & IoMT Research</div>
+    </div>
+  </div>
+  <div class="menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" data-page="home" class="nav-link active">Home</a></li>
+    <li><a href="#" data-page="about" class="nav-link">About</a></li>
+    <li><a href="#" data-page="domains" class="nav-link">Domains</a></li>
+    <li><a href="#" data-page="projects" class="nav-link">Projects</a></li>
+    <li><a href="#" data-page="technologies" class="nav-link">Technologies</a></li>
+    <li><a href="#" data-page="vision" class="nav-link">Vision</a></li>
+    <li><a href="#" data-page="founder" class="nav-link">Founder</a></li>
+    <li><a href="#" data-page="contact" class="nav-link">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="back-nav-btn" id="globalBackBtn"><i class="fas fa-arrow-left"></i> <span>Back</span></div>
+
+<main>
+  <!-- HOME PAGE -->
+  <div id="home-page" class="page-section active-page">
+    <section class="hero-full">
+      <canvas id="particle-canvas-home"></canvas>
+      <div class="hero-content">
+        <h1>Engineering Intelligent Healthcare Ecosystems</h1>
+        <p class="hero-sub">AI, IoMT, and Biomedical Intelligence Solutions powering next-generation smart hospitals and connected healthcare systems.</p>
+        <div class="btn-group">
+          <a href="#" class="btn-primary" data-page-link="projects">Explore Projects</a>
+          <a href="#" class="btn-outline" data-page-link="contact">Contact Us</a>
+        </div>
+        <p style="margin-top: 25px; color:#9edfff; font-weight: 500;">Building AI-powered biomedical technologies for the future of smart hospitals.</p>
+      </div>
+    </section>
+    <div style="text-align: center; margin: 2rem auto 4rem; max-width: 800px;">
+      <div class="glass-panel" style="padding: 2rem;">
+        <i class="fas fa-dna" style="font-size: 2.8rem; color:#0ff;"></i>
+        <p style="margin-top: 1rem;">Pioneering biomedical R&D, AI diagnostics, and intelligent hospital ecosystems. Welcome to the future of connected care.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about-page" class="page-section">
+    <section style="padding: 80px 5% 60px;">
+      <h2 class="section-title">About Biosynervix</h2>
+      <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+        <div class="glass-panel" style="padding: 2.5rem;">
+          <i class="fas fa-flask" style="font-size: 3rem; color: #0ff; margin-bottom: 1rem;"></i>
+          <p style="font-size: 1.25rem; line-height: 1.5;">Biosynervix is a biomedical R&D startup focused on developing intelligent healthcare technologies using AI, IoMT, embedded systems, and predictive analytics for smart hospitals and patient care. <br><br>We combine deep-tech innovation with clinical expertise to reshape global healthcare infrastructure.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- DOMAINS -->
+  <div id="domains-page" class="page-section">
+    <section style="padding: 80px 5% 60px;">
+      <h2 class="section-title">Core Domains</h2>
+      <div class="cards-grid">
+        <div class="glow-card"><i class="fas fa-microscope"></i><h3>Biomedical Engineering</h3></div>
+        <div class="glow-card"><i class="fas fa-wifi"></i><h3>IoMT Solutions</h3></div>
+        <div class="glow-card"><i class="fas fa-brain"></i><h3>AI Healthcare Systems</h3></div>
+        <div class="glow-card"><i class="fas fa-microchip"></i><h3>Embedded Systems</h3></div>
+        <div class="glow-card"><i class="fas fa-heartbeat"></i><h3>Smart Monitoring</h3></div>
+        <div class="glow-card"><i class="fas fa-chart-line"></i><h3>Predictive Maintenance</h3></div>
+        <div class="glow-card"><i class="fas fa-stethoscope"></i><h3>Medical Device Innovation</h3></div>
+        <div class="glow-card"><i class="fas fa-chart-pie"></i><h3>Healthcare Analytics</h3></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PROJECTS -->
+  <div id="projects-page" class="page-section">
+    <section style="padding: 80px 5% 60px;">
+      <h2 class="section-title">Featured Innovation</h2>
+      <div class="project-showcase">
+        <div class="project-details" style="flex:1.2">
+          <div style="font-size: 2.2rem; font-weight: 800; color:#0ff;">BioTrack AI</div>
+          <p style="margin: 1rem 0; font-size: 1.1rem;">An AI-powered biomedical asset tracking and predictive maintenance platform for hospitals.</p>
+          <ul style="list-style: none; margin-top: 1rem;">
+            <li><i class="fas fa-map-marker-alt" style="color:#0ff; width: 30px;"></i> Real-time equipment tracking</li>
+            <li><i class="fas fa-bell" style="color:#0ff;"></i> Predictive maintenance alerts</li>
+            <li><i class="fas fa-chart-simple" style="color:#0ff;"></i> Equipment health monitoring</li>
+            <li><i class="fas fa-microchip" style="color:#0ff;"></i> IoMT integration</li>
+            <li><i class="fas fa-chart-line" style="color:#0ff;"></i> Smart dashboard analytics</li>
+          </ul>
+        </div>
+        <div class="dashboard-mockup">
+          <div style="font-weight: bold; margin-bottom: 1rem;"><i class="fas fa-chart-network"></i> BIOMEDICAL AI OPERATIONS CENTER</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="glass-panel" style="padding: 0.8rem;"><i class="fas fa-microscope"></i> Devices: 187</div>
+            <div class="glass-panel" style="padding: 0.8rem;"><i class="fas fa-exclamation-triangle"></i> Alerts: 2</div>
+            <div class="glass-panel" style="padding: 0.8rem;"><i class="fas fa-chart-line"></i> Uptime 99.4%</div>
+            <div class="glass-panel" style="padding: 0.8rem;"><i class="fas fa-robot"></i> AI Accuracy 96%</div>
+          </div>
+          <div style="margin-top: 1rem; background: #07121e; border-radius: 20px; padding: 0.7rem; text-align: center;">📡 IoMT Spectrum | Asset Health: Critical Care Monitors ▲</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- TECHNOLOGIES -->
+  <div id="technologies-page" class="page-section">
+    <section style="padding: 80px 5% 60px;">
+      <h2 class="section-title">Technologies & Stack</h2>
+      <div class="tech-detailed-grid">
+        <div class="tech-detailed-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/embeddedc/embeddedc-original.svg" alt="ESP32"><h3>ESP32</h3><p>Dual-core microcontroller with Wi-Fi/BLE for IoMT edge nodes, real-time patient monitoring and medical asset tracking.</p></div>
+        <div class="tech-detailed-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino"><h3>Arduino</h3><p>Prototyping biomedical sensors and rapid embedded systems for wearable health devices and data acquisition.</p></div>
+        <div class="tech-detailed-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"><h3>Node.js</h3><p>Backend microservices for handling IoMT data streams, REST APIs and real-time hospital device coordination.</p></div>
+        <div class="tech-detailed-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"><h3>Firebase</h3><p>Real-time database & authentication for asset tracking dashboards and secure health data synchronization.</p></div>
+        <div class="tech-detailed-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"><h3>React</h3><p>Dynamic front-end dashboards for hospital analytics, predictive insights and equipment health visualization.</p></div>
+        <div class="tech-detailed-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mosquitto/mosquitto-original.svg" alt="MQTT"><h3>MQTT</h3><p>Lightweight IoMT protocol for low-latency communication between medical devices and central analytics.</p></div>
+        <div class="tech-detailed-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><h3>Python</h3><p>AI/ML models for predictive maintenance, anomaly detection in biomedical signals and patient risk scoring.</p></div>
+        <div class="tech-detailed-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="AI/ML"><h3>AI/ML</h3><p>Deep learning & computer vision for diagnostic assistance and real-time medical imaging analytics.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- VISION -->
+  <div id="vision-page" class="page-section">
+    <section style="padding: 80px 5% 60px;">
+      <h2 class="section-title">Our Vision</h2>
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <div class="glass-panel" style="padding: 3rem;">
+          <i class="fas fa-eye" style="font-size: 3.5rem; color:#0ff;"></i>
+          <p style="font-size: 1.6rem; font-weight: 500; margin: 1.5rem 0;">“Intelligent, connected, and affordable healthcare technologies that improve hospital efficiency and patient outcomes.”</p>
+          <p>— shaping the next decade of smart hospitals globally</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FOUNDER -->
+  <div id="founder-page" class="page-section">
+    <section style="padding: 80px 5% 60px;">
+      <h2 class="section-title">Founder & R&D Lead</h2>
+      <div class="founder-card">
+        <div class="founder-avatar-img"><i class="fas fa-microchip"></i></div>
+        <h2 style="font-size: 2rem;">BioSynervix</h2>
+        <p style="color: #0ff; font-weight: 600;">Founder & Biomedical R&D Developer</p>
+        <p style="margin-top: 1rem;">Focused on building AI-driven biomedical technologies, IoMT systems, and smart healthcare innovations.</p>
+        <div style="margin-top: 1.5rem;"><i class="fas fa-quote-left"></i> Engineering the future of precision medicine.</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact-page" class="page-section">
+    <section style="padding: 80px 5% 60px;">
+      <h2 class="section-title">Connect & Collaborate</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <p><i class="fas fa-envelope" style="color:#0ff; width: 30px;"></i> <strong>Email:</strong> synervix.healthtech@gmail.com</p>
+          <p><i class="fab fa-linkedin" style="color:#0ff;"></i> <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/company/biosynervix/" target="_blank" style="color:#aaf; text-decoration: none; border-bottom: 1px dashed #0ff;">linkedin.com/company/biosynervix/</a></p>
+          <p><i class="fab fa-github" style="color:#0ff;"></i> <strong>GitHub:</strong> <a href="https://github.com/biosynervix-rnd" target="_blank" style="color:#aaf; text-decoration: none; border-bottom: 1px dashed #0ff;">github.com/biosynervix-rnd</a></p>
+          <p><i class="fas fa-phone-alt"></i> <strong>Contact:</strong> +91 6369751125</p>
+          <div style="margin-top: 2rem;"><i class="fas fa-map-marker-alt"></i> India | Biomedical Innovation Hub</div>
+        </div>
+        <div class="contact-card">
+          <h3>Send a message</h3>
+          <input type="text" placeholder="Full name" style="width:100%; margin:8px 0; padding:12px; border-radius:40px; background:#0a121e; border:1px solid #0ff; color:white; outline:none;">
+          <input type="email" placeholder="Email" style="width:100%; margin:8px 0; padding:12px; border-radius:40px; background:#0a121e; border:1px solid #0ff; outline:none;">
+          <textarea rows="3" placeholder="Inquiry" style="width:100%; margin:8px 0; padding:12px; border-radius:24px; background:#0a121e; border:1px solid #0ff; outline:none;"></textarea>
+          <button class="btn-primary" style="width:100%;">Send →</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 Biosynervix. All Rights Reserved.</p>
+    <div class="footer-social" style="margin-top:10px;">
+      <i class="fab fa-linkedin"></i>
+      <i class="fab fa-github" style="margin-left:15px;"></i>
+      <i class="fas fa-envelope" style="margin-left:15px;"></i>
+    </div>
+  </footer>
+</main>
+
+<script>
+  window.addEventListener('load', () => { const l = document.getElementById('loader'); setTimeout(() => { l.style.opacity = '0'; l.style.visibility = 'hidden'; }, 500); });
+  const pages = ['home', 'about', 'domains', 'projects', 'technologies', 'vision', 'founder', 'contact'];
+  let currentPage = 'home';
+  function showPage(pageId) {
+    pages.forEach(p => { const el = document.getElementById(`${p}-page`); if(el) el.classList.remove('active-page'); });
+    const activeDiv = document.getElementById(`${pageId}-page`); if(activeDiv) activeDiv.classList.add('active-page');
+    currentPage = pageId;
+    document.querySelectorAll('.nav-link').forEach(link => { const lp = link.getAttribute('data-page'); if(lp === pageId) link.classList.add('active'); else link.classList.remove('active'); });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const backBtn = document.getElementById('globalBackBtn'); if(backBtn) backBtn.style.opacity = pageId === 'home' ? '0.4' : '1';
+  }
+  document.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); showPage(link.getAttribute('data-page')); }));
+  document.querySelectorAll('[data-page-link]').forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); showPage(btn.getAttribute('data-page-link')); }));
+  const backBtn = document.getElementById('globalBackBtn'); if(backBtn) backBtn.addEventListener('click', () => { if(currentPage !== 'home') { const idx = pages.indexOf(currentPage); showPage(pages[idx-1] || 'home'); } });
+  const menuIcon = document.getElementById('menuIcon'), navLinksMenu = document.getElementById('navLinks');
+  menuIcon.addEventListener('click', () => navLinksMenu.classList.toggle('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => navLinksMenu.classList.remove('active')));
+
+  // particle network
+  const canvas = document.getElementById('particle-canvas-home');
+  if(canvas) {
+    let ctx = canvas.getContext('2d'), width, height, particles = [];
+    const resize = () => { width = window.innerWidth; height = window.innerHeight; canvas.width = width; canvas.height = height; };
+    const init = () => { particles = []; for(let i=0;i<65;i++) particles.push({ x: Math.random()*width, y: Math.random()*height, radius: Math.random()*2+1.2, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.3, alpha: Math.random()*0.6+0.3, pulse: Math.random()*Math.PI*2 }); };
+    const draw = () => { if(!ctx) return; ctx.clearRect(0,0,width,height); particles.forEach((p,i) => { ctx.beginPath(); ctx.arc(p.x,p.y,p.radius,0,Math.PI*2); let glow = 0.5+Math.sin(Date.now()*0.002+p.pulse)*0.25; ctx.fillStyle = `rgba(0,200,255,${p.alpha*glow})`; ctx.fill(); for(let j=i+1;j<particles.length;j++){ let p2=particles[j], dx=p.x-p2.x, dy=p.y-p2.y, dist=Math.hypot(dx,dy); if(dist<130){ ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(p2.x,p2.y); ctx.strokeStyle=`rgba(0,180,250,${0.2*(1-dist/130)})`; ctx.lineWidth=0.7; ctx.stroke(); } } p.x+=p.vx; if(p.x<0)p.x=width; if(p.x>width)p.x=0; p.y+=p.vy; if(p.y<0)p.y=height; if(p.y>height)p.y=0; p.pulse+=0.02; }); requestAnimationFrame(draw); };
+    window.addEventListener('resize', () => { resize(); init(); }); resize(); init(); draw();
+  }
+  const observer = new IntersectionObserver((e) => e.forEach(entry => { if(entry.isIntersecting) entry.target.style.opacity = '1'; }), { threshold: 0.1 });
+  document.querySelectorAll('.glow-card, .glass-panel, .founder-card, .contact-card, .tech-detailed-card, .dashboard-mockup').forEach(el => { el.style.opacity = '0'; el.style.transition = 'opacity 0.5s ease'; observer.observe(el); });
+  setTimeout(() => { document.querySelectorAll('.glow-card, .glass-panel, .founder-card, .contact-card, .tech-detailed-card, .dashboard-mockup').forEach(el => { const rect = el.getBoundingClientRect(); if(rect.top < window.innerHeight-80) el.style.opacity = '1'; }); }, 200);
+</script>
+</body>
+</html>
